@@ -1,0 +1,149 @@
+@mixin  ease-out{
+    transition: all 1s ease-out;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Fira Sans Extra Condensed", sans-serif;
+}
+
+.split{
+    display:flex;
+    gap:1em;
+    justify-content: center;
+}
+
+.split >* {
+flex-basis: 30%;
+min-width: 15em;
+}
+
+.menu-btn {
+    position: fixed;
+    z-index: 3;
+    right: 35px;
+    top: 35px;
+    cursor: pointer;
+    @include ease-out;
+
+    .btn-line{
+        width: 28px;
+        height: 3px;
+        margin: 0 0 5px 0;
+        background:#444;
+        border-radius: 20%;
+        @include ease-out;
+    }
+      // rotate the button
+      &.close {
+        transform: rotate(180deg);
+
+        .btn-line {
+            // line 1rotate
+          &:nth-child(1){
+              transform: rotate(45deg) translate(5px, 5px);
+          }
+            // line 2 hide
+            &:nth-child(2){
+             opacity: 0;
+            }
+
+             // line3 rotate
+             &:nth-child(3){
+                transform: rotate(-45deg) translate(7px,-6px);
+        }
+    }
+}
+}
+
+// menu overlay
+
+.menu{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity:0.9;
+    visibility: hidden;
+    overflow: hidden;
+    
+     &.show {
+        visibility: visible;
+    }
+
+    
+    &-nav {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        float: right;
+        width: 30%;
+       height: 70vh;
+       overflow: hidden;
+
+    }
+    
+    &-nav{
+        margin: 0;
+        padding:0;
+        background: darken(#444,5);
+        list-style: none;
+        transform: translate3d(0,-100%,0);
+        @include ease-out;
+
+        &.show{
+            // slide in
+
+            transform: translate3d(0,0,0,);
+            overflow: hidden;
+        }
+    
+    }
+    //branging
+    &-branding{
+        background: #444;
+        transform: translate3d(0,100%,0);
+        @include ease-out;
+
+        &.show{
+            // slide in
+    
+            transform: translate3d(0,0,0,);
+        }
+        
+    }
+    .nav-item {
+        transform: translate3d(600px,0,0);
+        @include ease-out;
+
+        &.show{
+            // slide in
+    
+            transform: translate3d(0,0,0,);
+    }
+    &.current > a {
+        color: aliceblue;
+    }
+    
+
+}
+.nav-link {
+    display: inline-block;
+    position: relative;
+    font-size: clamp(0.5em, 3vw, 1.5em);
+    text-transform: uppercase;
+    padding: 1rem 0;
+    font-weight: 300;
+    color:#444;
+    text-decoration: none;
+    @include ease-out;
+
+    &:hover {
+        color: aliceblue;
+    }
+}
+
+}
